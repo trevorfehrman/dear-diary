@@ -11,6 +11,7 @@ const query = groq`
     ...,
     artist->,
     author->,
+    mediaType->,
     categories[]->,
   } | order(_createdAt, desc)
 `;

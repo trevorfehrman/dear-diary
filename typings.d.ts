@@ -9,6 +9,7 @@ type Base = {
 interface Post extends Base {
   author: Author;
   artist: Artist;
+  mediaType: MediaType;
   body: Block[];
   categories: Category[];
   mainImage: Image;
@@ -26,6 +27,11 @@ interface Author extends Base {
 
 interface Artist extends Base {
   name: string;
+}
+
+interface MediaType extends Base {
+  title: string;
+  description: string;
 }
 
 interface Image {

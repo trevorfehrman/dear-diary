@@ -30,6 +30,13 @@ export default defineType({
       type: 'reference',
       to: { type: 'artist' },
     }),
+
+    defineField({
+      name: 'mediaType',
+      title: 'Media Type',
+      type: 'reference',
+      to: { type: 'mediaType' },
+    }),
     defineField({
       name: 'author',
       title: 'Author',
