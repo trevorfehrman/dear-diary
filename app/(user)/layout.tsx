@@ -16,7 +16,7 @@ const sono = Nunito({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={`${caveat.variable} ${sono.variable}`}>
-      <body className='max-w-7xl mx-auto font-sans bg-[#f4f4f4]'>
+      <body className='max-w-7xl mx-auto font-sans bg-[#f4f4f4] text-gray-800'>
         <Header />
         {children}
       </body>

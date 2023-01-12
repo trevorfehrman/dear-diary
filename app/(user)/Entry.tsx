@@ -27,9 +27,7 @@ function Entry({ entry }: Props) {
         <div className='flex-1 pl-10'>
           <div>
             <h3 className='text-4xl font-bold'>{entry.title}</h3>
-            <h4 className='text-white bg-red-300 p-1 rounded uppercase text-center'>
-              {entry.artist.name}
-            </h4>
+            <h4 className='bg-red-300 p-1 rounded uppercase text-center'>{entry.artist.name}</h4>
           </div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae in, laudantium veritatis
