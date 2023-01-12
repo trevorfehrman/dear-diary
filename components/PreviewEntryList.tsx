@@ -8,7 +8,7 @@ type Props = {
 
 function PreviewEntryList({ query }: Props) {
   const posts = usePreview(null, query);
-  return <EntryList posts={posts} />;
+  return <EntryList entries={posts} />;
 }
 
 export default PreviewEntryList;
