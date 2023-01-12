@@ -1,6 +1,6 @@
 'use client';
 import { usePreview } from 'lib/sanity.preview';
-import EntryList from './EntryList';
+import EntryList from '../app/(user)/EntryList';
 
 type Props = {
   query: string;

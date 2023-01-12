@@ -25,6 +25,12 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'artist',
+      title: 'Artist',
+      type: 'reference',
+      to: { type: 'artist' },
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',

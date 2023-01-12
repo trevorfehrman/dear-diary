@@ -8,6 +8,7 @@ type Base = {
 
 interface Post extends Base {
   author: Author;
+  artist: Artist;
   body: Block[];
   categories: Category[];
   mainImage: Image;
@@ -21,6 +22,10 @@ interface Author extends Base {
   image: Image;
   name: string;
   slug: Slug;
+}
+
+interface Artist extends Base {
+  name: string;
 }
 
 interface Image {

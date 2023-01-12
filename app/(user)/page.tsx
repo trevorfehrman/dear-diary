@@ -3,11 +3,13 @@ import { groq } from 'next-sanity';
 import { client } from 'lib/sanity.client';
 import PreviewSuspense from 'components/PreviewSuspense';
 import PreviewEntryList from 'components/PreviewEntryList';
-import EntryList from 'components/EntryList';
+import EntryList from 'app/(user)/EntryList';
+import Banner from 'app/(user)/Banner';
 
 const query = groq`
   *[_type=="post"] {
     ...,
+    artist->,
     author->,
     categories[]->,
   } | order(_createdAt, desc)
@@ -27,12 +29,17 @@ export default async function HomePage() {
           </div>
         }
       >
+        <Banner />
         <PreviewEntryList query={query} />
       </PreviewSuspense>
     );
   }
 
-  const posts = await client.fetch(query);
-
-  return <EntryList posts={posts} />;
+  const entries = await client.fetch(query);
+  return (
+    <>
+      <Banner />
+      <EntryList entries={entries} />
+    </>
+  );
 }

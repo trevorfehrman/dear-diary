@@ -1,5 +1,5 @@
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from 'components/RichTextComponents';
+import { RichTextComponents } from './RichTextComponents';
 import { client } from 'lib/sanity.client';
 import urlFor from 'lib/url-for';
 import { groq } from 'next-sanity';
