@@ -14,7 +14,7 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   const query = groq`
-    *[_type=='post'] {
+    *[_type=='entry'] {
       slug
     }
   `;
@@ -28,72 +28,53 @@ export async function generateStaticParams() {
 
 async function Entry({ params: { slug } }: Props) {
   const query = groq`
-    *[_type=='post' && slug.current == $slug][0]
+    *[_type=='entry' && slug.current == $slug][0]
     {
       ...,
       author->,
-      categories[]->
     }
   `;
 
   const post: Post = await client.fetch(query, { slug });
 
   return (
-    <article className='px-10 pb-28'>
-      <section className='space-y-2 border border-[#F7AB0A] text-white'>
-        <div className='relative min-h-56 flex flex-col md:flex-row justify-between'>
-          <div className='absolute top-0 w-full h-full opacity-10 blur-sm p-10'>
+    <article className='pb-28'>
+      <section className='space-y-2 border border-red-300 text-gray-900'>
+        <div className='relative h-96 flex'>
+          <div className='absolute top-0 right-0 p-5 grayscale'>
+            <Image
+              className='rounded-full'
+              src={urlFor(post.author.image).url()}
+              height={100}
+              width={100}
+              alt={post.author.name}
+            />
+          </div>
+          <div className='absolute top-0 w-full h-full opacity-10 p-10'>
             <Image
               className='object-cover object-center mx-auto'
-              src={urlFor(post.mainImage).url()}
-              alt={post.author.name}
+              src={urlFor(post.mainImage).width(750).height(200).url()}
+              alt={`Poster for ${post.title}`}
               fill
             />
           </div>
-          <section className='p-5 bg-[#F7AB0A] w-full'>
-            <div className='flex flex-col md:flex-row justify-between gap-y-5'>
-              <div>
-                <h1 className='text-4xl font-extrabold'>{post.title}</h1>
-                <p>
-                  {new Date(post._createdAt).toLocaleDateString('en-US', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </p>
-              </div>
-              <div className='flex items-center space-x-2'>
-                <Image
-                  className='rounded-full'
-                  src={urlFor(post.author.image).url()}
-                  height={40}
-                  width={40}
-                  alt={post.author.name}
-                />
-                <div className='w-64'>
-                  <h3 className='text-lg font-bold'>{post.author.name}</h3>
-
-                  <div>{/* Todo: Author Bio */}</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h2 className='italic pt-10'>{post.description}</h2>
-              <div className='flex items-center justify-end mt-auto space-x-2'>
-                {post.categories.map(category => (
-                  <p
-                    key={category._id}
-                    className='bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-semibold mt-4'
-                  >
-                    {category.title}
-                  </p>
-                ))}
-              </div>
+          <section className='p-5 bg-red-300 w-full flex items-end justify-end'>
+            <div className='text-center'>
+              <h1 className='text-7xl font-extrabold'>{post.title}</h1>
+              <p className='font-serif text-3xl'>
+                {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </p>
             </div>
           </section>
         </div>
       </section>
-      <PortableText value={post.body} components={RichTextComponents} />
+      <div className='max-w-4xl mx-auto text-xl mt-10'>
+        <PortableText value={post.body} components={RichTextComponents} />
+      </div>
     </article>
   );
 }

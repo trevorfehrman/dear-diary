@@ -1,19 +1,21 @@
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
+  name: 'entry',
+  title: 'Entry',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
       type: 'string',
+      validation: Rule => Rule.required().min(1).max(275),
     }),
     defineField({
       name: 'slug',
@@ -23,12 +25,14 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'artist',
       title: 'Artist',
       type: 'reference',
       to: { type: 'artist' },
+      validation: Rule => Rule.required(),
     }),
 
     defineField({
@@ -36,12 +40,14 @@ export default defineType({
       title: 'Media Type',
       type: 'reference',
       to: { type: 'mediaType' },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: { type: 'author' },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'mainImage',
@@ -50,22 +56,19 @@ export default defineType({
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+      validation: Rule => Rule.required(),
     }),
   ],
 

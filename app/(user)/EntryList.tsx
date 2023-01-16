@@ -1,4 +1,4 @@
-import Entry from './Entry';
+import EntryListItem from './EntryListItem';
 type Props = {
   entries: Post[];
 };
@@ -7,7 +7,7 @@ function EntryList({ entries }: Props) {
     <div>
       <div className='grid grid-cols-1 gap-y-16'>
         {entries.map(entry => (
-          <Entry key={entry._id} entry={entry} />
+          <EntryListItem key={entry._id} entry={entry} />
         ))}
       </div>
     </div>

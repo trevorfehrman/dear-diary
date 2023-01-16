@@ -1,4 +1,4 @@
-export function dateFormatter(date: string) {
+export function dateFormatter(date: Date) {
   return new Date(date).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',

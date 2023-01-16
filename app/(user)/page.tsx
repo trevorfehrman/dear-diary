@@ -7,13 +7,12 @@ import EntryList from 'app/(user)/EntryList';
 import Banner from 'app/(user)/Banner';
 
 const query = groq`
-  *[_type=="post"] {
+  *[_type=="entry"] {
     ...,
     artist->,
     author->,
     mediaType->,
-    categories[]->,
-  } | order(_createdAt, desc)
+  } | order(publishedAt desc)
 `;
 
 export const revalidate = 60;
