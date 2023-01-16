@@ -72,7 +72,7 @@ async function Entry({ params: { slug } }: Props) {
           </section>
         </div>
       </section>
-      <div className='max-w-4xl mx-auto text-xl mt-10'>
+      <div className='max-w-4xl mx-auto text-xl mt-10 rich-text-container'>
         <PortableText value={post.body} components={RichTextComponents} />
       </div>
     </article>
